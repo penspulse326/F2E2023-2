@@ -1,23 +1,29 @@
+import ImgDots from "../assets/bg-dots.png";
+import ImgNumber2 from "../assets/number-2.svg";
+import ImgNumber0 from "../assets/number-0.svg";
+import ImgCardMilkTea from "../assets/card-milkTea.png";
+import ImgCardFriedChicken from "../assets/card-friedChicken.png";
+import ImgCharacterMilkTea from "../assets/character-milkTea.png";
+import ImgCharacterFriedChicken from "../assets/character-friedChicken.png";
+import ImgFlagsMilkTea from "../assets/bg-flags-milkTea.png";
+import ImgFlagsFriedChicken from "../assets/bg-flags-friedChicken.png";
+
 function Home() {
   return (
     <div className="noisy-beige relative flex flex-col items-center">
-      <img
-        className="relative top-0 z-50 w-full"
-        src="./src/assets/bg-dots.png"
-        alt="bg-dots"
-      />
+      <img className="relative top-0 z-50 w-full" src={ImgDots} alt="bg-dots" />
       <ul className="flex gap-1 mt-[60px]">
         <li className="noisy-orange flex justify-center items-end pb-[22px] w-20 h-20 rounded-[10px]">
-          <img src="./src/assets/number-2.svg" alt="number-0" />
+          <img src={ImgNumber2} alt="number-2" />
         </li>
         <li className="noisy-orange flex justify-center items-end pb-[22px] w-20 h-20 rounded-[10px]">
-          <img src="./src/assets/number-0.svg" alt="number-0" />
+          <img src={ImgNumber0} alt="number-0" />
         </li>
         <li className="noisy-orange flex justify-center items-end pb-[22px] w-20 h-20 rounded-[10px]">
-          <img src="./src/assets/number-2.svg" alt="number-0" />
+          <img src={ImgNumber2} alt="number-0" />
         </li>
         <li className="noisy-orange flex justify-center items-end pb-[22px] w-20 h-20 rounded-[10px]">
-          <img src="./src/assets/number-0.svg" alt="number-0" />
+          <img src={ImgNumber0} alt="number-0" />
         </li>
       </ul>
       <ul className="flex gap-4 mt-4 hover:scale-105 duration-300">
@@ -44,12 +50,12 @@ function Home() {
         <li className="relative flex flex-col justify-end items-center overflow-hidden">
           <img
             className="rounded-[50px]"
-            src="./src/assets/card-milk.png"
-            alt="bg-milk"
+            src={ImgCardMilkTea}
+            alt="card-milkTea"
           />
           <img
             className="character-image absolute hover:scale-105 origin-bottom duration-300"
-            src="./src/assets/character-milk.png"
+            src={ImgCharacterMilkTea}
             alt="陳珍奶"
           />
           <h2 className="character-name noisy-orange absolute -top-20 text-white text-4xl duration-300">
@@ -59,12 +65,12 @@ function Home() {
         <li className="relative flex flex-col justify-end items-center overflow-hidden">
           <img
             className="rounded-[50px]"
-            src="./src/assets/card-chicken.png"
-            alt="bg-chicken"
+            src={ImgCardFriedChicken}
+            alt="card-friedChicken"
           />
           <img
             className="character-image absolute hover:scale-105 origin-bottom duration-300"
-            src="./src/assets/character-chicken.png"
+            src={ImgCharacterFriedChicken}
             alt="黃雞排"
           />
           <h2 className="character-name noisy-orange absolute -top-20  text-white text-4xl duration-300">
@@ -76,29 +82,29 @@ function Home() {
         <li>
           <img
             className="flags-milk absolute left-0 w-[15%] duration-300"
-            src="./src/assets/bg-milk.png"
-            alt="bg-milk-flags"
+            src={ImgFlagsMilkTea}
+            alt="bg-flags-milkTea"
           />
         </li>
         <li>
           <img
             className="flags-milk absolute top-[200%] left-0 w-[15%] duration-300"
-            src="./src/assets/bg-milk.png"
-            alt="bg-milk-flags"
+            src={ImgFlagsFriedChicken}
+            alt="bg-flags-milkTea"
           />
         </li>
         <li>
           <img
             className="flags-chicken absolute top-0 right-0 w-[15%]"
-            src="./src/assets/bg-chicken.png"
-            alt="bg-chicken-flags"
+            src="./src/assets/bg-flags-friedChicken.png"
+            alt="bg-flags-friedChicken"
           />
         </li>
         <li>
           <img
             className="flags-chicken absolute top-[200%] right-0 w-[15%]"
-            src="./src/assets/bg-chicken.png"
-            alt="bg-chicken-flags"
+            src="./src/assets/bg-flags-friedChicken.png"
+            alt="bg-flags-friedChicken"
           />
         </li>
       </ul>
