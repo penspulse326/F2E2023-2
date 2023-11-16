@@ -12,10 +12,16 @@ export default {
         pink: "#E49794",
         green: "#50B184",
         blue: "#51A8BC",
-        brown: "#CEBDAD",
+        brown: { DEFAULT: "#CEBDAD", dark: "#87725E" },
         yellow: "#F9D849",
         beige: "#F0EBDF",
         orange: "#D6875A",
+        gray: {
+          80: "#333333",
+          60: "#666666",
+          40: "#999999",
+          20: "#CCCCCC",
+        },
       },
     },
     fontFamily: {

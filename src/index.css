@@ -6,7 +6,7 @@
 
 @layer base {
   * {
-    @apply font-sans;
+    @apply text-gray-80 font-sans;
   }
 }
 
@@ -24,6 +24,10 @@
 
 .noisy-beige {
   background-image: url("./assets/texture-beige.png");
+}
+
+.bg-radiation {
+  background-image: url("./assets/bg-chart.png");
 }
 
 .flags-milk {
