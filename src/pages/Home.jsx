@@ -1,8 +1,8 @@
 function Home() {
   return (
-    <div className="noisy-beige relative flex flex-col items-center w-[100vw]">
+    <div className="noisy-beige relative flex flex-col items-center">
       <img
-        className="relative top-0 z-50"
+        className="relative top-0 z-50 w-full"
         src="./src/assets/bg-dots.png"
         alt="bg-dots"
       />
@@ -20,7 +20,7 @@ function Home() {
           <img src="./src/assets/number-0.svg" alt="number-0" />
         </li>
       </ul>
-      <ul className="flex gap-4 mt-4">
+      <ul className="flex gap-4 mt-4 hover:scale-105 duration-300">
         <li className="noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
           台
         </li>
@@ -41,20 +41,35 @@ function Home() {
         </li>
       </ul>
       <ul className="z-50 flex gap-6 mt-[60px]">
-        <li className="relative flex justify-center items-end">
+        <li className="relative flex flex-col justify-end items-center overflow-hidden">
           <img
             className="rounded-[50px]"
             src="./src/assets/card-milk.png"
             alt="bg-milk"
           />
           <img
-            className="absolute hover:scale-105 origin-bottom duration-300"
+            className="character-image absolute hover:scale-105 origin-bottom duration-300"
             src="./src/assets/character-milk.png"
             alt="陳珍奶"
           />
+          <h2 className="character-name noisy-orange absolute -top-20 text-white text-4xl duration-300">
+            陳珍奶
+          </h2>
         </li>
-        <li>
-          <img src="./src/assets/male.png" alt="黃雞排" />
+        <li className="relative flex flex-col justify-end items-center overflow-hidden">
+          <img
+            className="rounded-[50px]"
+            src="./src/assets/card-chicken.png"
+            alt="bg-chicken"
+          />
+          <img
+            className="character-image absolute hover:scale-105 origin-bottom duration-300"
+            src="./src/assets/character-chicken.png"
+            alt="黃雞排"
+          />
+          <h2 className="character-name noisy-orange absolute -top-20  text-white text-4xl duration-300">
+            黃雞排
+          </h2>
         </li>
       </ul>
       <ul>
@@ -88,7 +103,7 @@ function Home() {
         </li>
       </ul>
       <div className="noisy-orange relative z-100 flex justify-end mt-[90px] px-7 py-6 w-full h-[100px]">
-        <button className="text-white text-[40px] font-bold hover:scale-110 origin-right duration-300">
+        <button className="text-white text-[40px] font-bold hover:scale-110 duration-300">
           進入總統大選開票地圖 {">>>"}
         </button>
       </div>
