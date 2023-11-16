@@ -89,21 +89,21 @@ function Home() {
         <li>
           <img
             className="flags-milk absolute top-[200%] left-0 w-[15%] duration-300"
-            src={ImgFlagsFriedChicken}
+            src={ImgFlagsMilkTea}
             alt="bg-flags-milkTea"
           />
         </li>
         <li>
           <img
             className="flags-chicken absolute top-0 right-0 w-[15%]"
-            src="./src/assets/bg-flags-friedChicken.png"
+            src={ImgFlagsFriedChicken}
             alt="bg-flags-friedChicken"
           />
         </li>
         <li>
           <img
             className="flags-chicken absolute top-[200%] right-0 w-[15%]"
-            src="./src/assets/bg-flags-friedChicken.png"
+            src={ImgFlagsFriedChicken}
             alt="bg-flags-friedChicken"
           />
         </li>
