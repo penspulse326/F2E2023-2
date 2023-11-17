@@ -26,7 +26,7 @@ function Home() {
           <img src={ImgNumber0} alt="number-0" />
         </li>
       </ul>
-      <ul className="flex gap-4 mt-4 ">
+      <ul className="z-50 flex gap-4 mt-4 ">
         <li className="home-title-1 noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
           台
         </li>
@@ -47,33 +47,33 @@ function Home() {
         </li>
       </ul>
       <ul className="z-50 flex gap-6 mt-[60px]">
-        <li className="relative flex flex-col justify-end items-center overflow-hidden">
+        <li className="card-home relative flex flex-col justify-end items-center rounded-[50px] overflow-hidden">
           <img
-            className="rounded-[50px]"
+            className="duration-300"
             src={ImgCardMilkTea}
             alt="card-milkTea"
           />
           <img
-            className="character-image absolute hover:scale-105 origin-bottom duration-300"
+            className="character-image absolute origin-bottom duration-300"
             src={ImgCharacterMilkTea}
             alt="陳珍奶"
           />
-          <h2 className="character-name noisy-orange absolute -top-20 text-white text-4xl duration-300">
+          <h2 className="character-name absolute -top-20 bg-brown-dark text-white text-4xl duration-300">
             陳珍奶
           </h2>
         </li>
-        <li className="relative flex flex-col justify-end items-center overflow-hidden">
+        <li className="card-home relative flex flex-col justify-end items-center rounded-[50px] overflow-hidden">
           <img
-            className="rounded-[50px]"
+            className="duration-300"
             src={ImgCardFriedChicken}
             alt="card-friedChicken"
           />
           <img
-            className="character-image absolute hover:scale-105 origin-bottom duration-300"
+            className="character-image absolute origin-bottom duration-300"
             src={ImgCharacterFriedChicken}
             alt="黃雞排"
           />
-          <h2 className="character-name noisy-orange absolute -top-20  text-white text-4xl duration-300">
+          <h2 className="character-name  absolute -top-20 bg-orange text-white text-4xl duration-300">
             黃雞排
           </h2>
         </li>
