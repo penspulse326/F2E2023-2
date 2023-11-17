@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import cities from "../constants/cities.json";
 import districts from "../constants/districts.json";
 
-const cityOptions = cities.map((item) => ({ value: item, label: item }));
+const cityOptions = Object.keys(districts).map((item) => ({
+  value: item,
+  label: item,
+}));
 
 const customStyles = {
   control: (styles) => ({
@@ -42,7 +44,7 @@ export const CitySelector = ({ setCity }) => (
     onChange={(choice) => setCity(choice.value)}
     styles={customStyles}
     options={cityOptions}
-    placeholder="請選擇城市"
+    placeholder="請選擇縣市"
     components={{ DropdownIndicator }}
   />
 );
@@ -50,6 +52,7 @@ export const CitySelector = ({ setCity }) => (
 export const DistrictSelector = ({ city, setDistrict }) => {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
+  console.log(city);
 
   useEffect(() => {
     if (city) {
@@ -68,6 +71,7 @@ export const DistrictSelector = ({ city, setDistrict }) => {
       styles={customStyles}
       options={options}
       value={selectedOption}
+      isDisabled={!city}
       placeholder="請選擇鄉鎮市區"
       components={{ DropdownIndicator }}
       onChange={(choice) => handleChange(choice)}
