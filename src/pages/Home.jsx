@@ -26,23 +26,23 @@ function Home() {
           <img src={ImgNumber0} alt="number-0" />
         </li>
       </ul>
-      <ul className="flex gap-4 mt-4 hover:scale-105 duration-300">
-        <li className="noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
+      <ul className="flex gap-4 mt-4 ">
+        <li className="home-title-1 noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
           台
         </li>
-        <li className="noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
+        <li className="home-title-2 noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
           灣
         </li>
-        <li className="noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
+        <li className="home-title-3 noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
           總
         </li>
-        <li className="noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
+        <li className="home-title-4 noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
           統
         </li>
-        <li className="noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
+        <li className="home-title-5 noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
           大
         </li>
-        <li className="noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
+        <li className="home-title-6 noisy-orange rounded-[30px] text-white text-[80px] px-[60px] py-4">
           選
         </li>
       </ul>

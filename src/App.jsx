@@ -4,7 +4,7 @@ import Dashboard from "./pages/Dashboard";
 function App() {
   return (
     <div className="overflow-y-hidden">
-      <Dashboard></Dashboard>
+      <Home></Home>
     </div>
   );
 }
