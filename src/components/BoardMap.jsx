@@ -3,7 +3,6 @@ import pathData from "../constants/city-path.json";
 import cityResult from "../constants/city-result-2020.json";
 
 function BoardMap({ city, district }) {
-  console.log(city, district);
   const result = cityResult.filter((item) => item["行政區域"] !== "總計");
 
   return (
@@ -19,9 +18,9 @@ function BoardMap({ city, district }) {
         <g clipPath="url(#clip0_336_34015)">
           {result.map((item) => {
             const thisCity = item["行政區別"];
+            const isTarget = thisCity === city;
             const winColor =
               item["陳珍奶"] > item["黃雞排"] ? "#CEBDAD" : "#F9D849";
-            const isTarget = thisCity === city;
             const seletedColor = isTarget ? winColor : "#DBDBDB";
 
             const fill = city ? seletedColor : winColor;
