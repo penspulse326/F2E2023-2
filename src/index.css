@@ -6,12 +6,8 @@
 
 @layer base {
   * {
-    @apply font-sans;
+    @apply text-gray-80 font-sans;
   }
-}
-
-.character-image:hover ~ .character-name {
-  transform: translateY(300%);
 }
 
 .noisy {
@@ -26,12 +22,53 @@
   background-image: url("./assets/texture-beige.png");
 }
 
+.bg-radiation {
+  background-image: url("./assets/bg-chart.png");
+}
+
 .flags-milk {
   animation: slide 10s linear infinite;
 }
 
 .flags-chicken {
   animation: slide-r 10s linear infinite;
+}
+
+.card-home:hover img {
+  transform: scale(1.05);
+}
+
+.card-home:hover .character-name {
+  transform: translateY(300%);
+}
+
+.home-title-1 {
+  animation: jumping 5s infinite;
+}
+
+.home-title-2 {
+  animation: jumping 5s infinite;
+  animation-delay: 0.3s;
+}
+
+.home-title-3 {
+  animation: jumping 5s infinite;
+  animation-delay: 0.6s;
+}
+
+.home-title-4 {
+  animation: jumping 5s infinite;
+  animation-delay: 0.9s;
+}
+
+.home-title-5 {
+  animation: jumping 5s infinite;
+  animation-delay: 1.2s;
+}
+
+.home-title-6 {
+  animation: jumping 5s infinite;
+  animation-delay: 1.5s;
 }
 
 @keyframes slide {
@@ -49,5 +86,14 @@
   }
   100% {
     transform: translateY(100%);
+  }
+}
+
+@keyframes jumping {
+  10% {
+    border-radius: 50%;
+  }
+  20% {
+    border-radius: 50px;
   }
 }
