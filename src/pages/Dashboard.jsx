@@ -3,14 +3,14 @@ import BoardNav from "../components/BoardNav";
 
 function Dashboard() {
   return (
-    <>
+    <div>
       <BoardNav></BoardNav>
       <div className="noisy-beige">
         <div className="bg-radiation px-20 py-[100px] bg-cover">
           <Board></Board>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

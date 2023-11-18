@@ -71,6 +71,10 @@
   animation-delay: 1.5s;
 }
 
+/* path:hover {
+  fill: #d6875a;
+} */
+
 @keyframes slide {
   0% {
     transform: translateY(100%);
