@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import Select from "react-select";
 import districts from "../constants/districts.json";
 
-const cityOptions = Object.keys(districts).map((item) => ({
-  value: item,
-  label: item,
-}));
-
+// styles for react-select
 const customStyles = {
   control: (styles) => ({
     ...styles,
@@ -19,7 +16,7 @@ const customStyles = {
   }),
   indicatorSeparator: () => "",
 };
-
+// icon for react-select
 const DropdownIndicator = () => (
   <div className="p-[10px]">
     <svg
@@ -39,26 +36,42 @@ const DropdownIndicator = () => (
   </div>
 );
 
-export const CitySelector = ({ setCity }) => (
-  <Select
-    onChange={(choice) => setCity(choice.value)}
-    styles={customStyles}
-    options={cityOptions}
-    placeholder="請選擇縣市"
-    components={{ DropdownIndicator }}
-  />
-);
+export const CitySelector = ({ setCity }) => {
+  const cityOptions = districts.map(({ name }) => ({
+    value: name,
+    label: name,
+  }));
+
+  return (
+    <Select
+      styles={customStyles}
+      options={cityOptions}
+      components={{ DropdownIndicator }}
+      onChange={(choice) => setCity(choice.value)}
+      placeholder="請選擇縣市"
+    />
+  );
+};
 
 export const DistrictSelector = ({ city, setDistrict }) => {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(city);
 
+  // execute while city changed
   useEffect(() => {
-    if (city) {
-      setOptions(districts[city].map((item) => ({ value: item, label: item })));
-    }
+    if (!city) return; // prevent null when initializing
+
     setSelectedOption(null);
+    setDistrict(null);
+
+    setOptions(() => {
+      const target = districts.filter(({ name }) => name === city)[0];
+
+      return target.district.map((item) => ({
+        value: item,
+        label: item,
+      }));
+    });
   }, [city]);
 
   const handleChange = (choice) => {
@@ -72,9 +85,17 @@ export const DistrictSelector = ({ city, setDistrict }) => {
       options={options}
       value={selectedOption}
       isDisabled={!city}
-      placeholder="請選擇鄉鎮市區"
-      components={{ DropdownIndicator }}
       onChange={(choice) => handleChange(choice)}
+      components={{ DropdownIndicator }}
+      placeholder="請選擇鄉鎮市區"
     />
   );
+};
+
+CitySelector.propTypes = {
+  setCity: PropTypes.func.isRequired,
+};
+DistrictSelector.propTypes = {
+  city: PropTypes.string,
+  setDistrict: PropTypes.func.isRequired,
 };
