@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ImgDots from "../assets/bg-dots.png";
 import ImgNumber2 from "../assets/number-2.svg";
 import ImgNumber0 from "../assets/number-0.svg";
@@ -10,7 +11,7 @@ import ImgFlagsFriedChicken from "../assets/bg-flags-friedChicken.png";
 
 function Home() {
   return (
-    <div className="noisy-beige relative flex flex-col items-center">
+    <div className="noisy-beige relative flex flex-col items-center overflow-hidden">
       <img className="relative top-0 z-50 w-full" src={ImgDots} alt="bg-dots" />
       <ul className="flex gap-1 mt-[60px]">
         <li className="noisy-orange flex justify-center items-end pb-[22px] w-20 h-20 rounded-[10px]">
@@ -109,9 +110,12 @@ function Home() {
         </li>
       </ul>
       <div className="noisy-orange relative z-100 flex justify-end mt-[90px] px-7 py-6 w-full h-[100px]">
-        <button className="text-white text-[40px] font-bold hover:scale-110 duration-300">
+        <Link
+          className="text-white text-[40px] font-bold hover:scale-110 duration-300"
+          to="./dashboard"
+        >
           進入總統大選開票地圖 {">>>"}
-        </button>
+        </Link>
       </div>
     </div>
   );
