@@ -45,27 +45,22 @@
 .home-title-1 {
   animation: jumping 5s infinite;
 }
-
 .home-title-2 {
   animation: jumping 5s infinite;
   animation-delay: 0.3s;
 }
-
 .home-title-3 {
   animation: jumping 5s infinite;
   animation-delay: 0.6s;
 }
-
 .home-title-4 {
   animation: jumping 5s infinite;
   animation-delay: 0.9s;
 }
-
 .home-title-5 {
   animation: jumping 5s infinite;
   animation-delay: 1.2s;
 }
-
 .home-title-6 {
   animation: jumping 5s infinite;
   animation-delay: 1.5s;
@@ -73,6 +68,7 @@
 
 /* path:hover {
   fill: #d6875a;
+  ciry-path
 } */
 
 @keyframes slide {
@@ -96,8 +92,10 @@
 @keyframes jumping {
   10% {
     border-radius: 50%;
+    transform: scale(1.2);
+    transform-origin: center;
   }
   20% {
-    border-radius: 50px;
+    transform: scale(1);
   }
 }
