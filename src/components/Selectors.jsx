@@ -36,18 +36,30 @@ const DropdownIndicator = () => (
   </div>
 );
 
-export const CitySelector = ({ setCity }) => {
+export const CitySelector = ({ city, setCity }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const cityOptions = districts.map(({ name }) => ({
     value: name,
     label: name,
   }));
 
+  useEffect(() => {
+    if (!city) setSelectedOption(null);
+  }, [city]);
+
+  const handleChange = (choice) => {
+    setCity(choice.value);
+    setSelectedOption(choice);
+  };
+
   return (
     <Select
       styles={customStyles}
       options={cityOptions}
+      value={selectedOption}
       components={{ DropdownIndicator }}
-      onChange={(choice) => setCity(choice.value)}
+      onChange={(choice) => handleChange(choice)}
       placeholder="請選擇縣市"
     />
   );
@@ -59,10 +71,12 @@ export const DistrictSelector = ({ city, setDistrict }) => {
 
   // execute while city changed
   useEffect(() => {
-    if (!city) return; // prevent null when initializing
-
-    setSelectedOption(null);
-    setDistrict(null);
+    // prevent null when initializing
+    if (!city) {
+      setSelectedOption(null);
+      setDistrict(null);
+      return;
+    }
 
     setOptions(() => {
       const target = districts.filter(({ name }) => name === city)[0];
@@ -93,6 +107,7 @@ export const DistrictSelector = ({ city, setDistrict }) => {
 };
 
 CitySelector.propTypes = {
+  city: PropTypes.string,
   setCity: PropTypes.func.isRequired,
 };
 DistrictSelector.propTypes = {
