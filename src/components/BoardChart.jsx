@@ -1,4 +1,5 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import PropTypes from "prop-types";
 import { cityChartShape, voteChartShape } from "./Shapes";
 import cityResult from "../constants/city-result-2020.json";
 
@@ -79,19 +80,29 @@ const VoteRateChart = () => {
   );
 };
 
-function BoardChart() {
+function BoardChart({ city, district }) {
   return (
-    <div className="z-50 col-span-4 col-start-9 flex flex-col gap-6 h-[500px]">
+    <div className="relative z-50 col-span-4 col-start-9 flex flex-col h-[500px]">
+      {city && (
+        <p className="absolute -top-20 mb-10 text-xl">
+          您選取的是 <span className="text-pink text-[32px]">{city}</span>
+        </p>
+      )}
       <h3 className="px-4 text-xl border-l-[10px] border-pink">
         2020 總統大選得票率
       </h3>
       <CityChart></CityChart>
-      <h3 className="px-4 text-xl border-l-[10px] border-pink">
-        2020 總統大選投票率
+      <h3 className="mt-6 px-4 text-xl border-l-[10px] border-pink">
+        {city ? "歷史回顧" : "2020 總統大選投票率"}
       </h3>
       <VoteRateChart></VoteRateChart>
     </div>
   );
 }
+
+BoardChart.propTypes = {
+  city: PropTypes.string,
+  district: PropTypes.string,
+};
 
 export default BoardChart;
