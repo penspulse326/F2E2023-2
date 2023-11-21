@@ -12,7 +12,7 @@ function BoardLinks({ setCity, setDistrict }) {
       <li>
         <Link
           to="../"
-          className="p-[10px] bg-white border border-gray-80 text-xl hover:text-pink hover:border-pink  duration-300"
+          className="block p-[10px] bg-white border border-gray-80 text-xl hover:text-pink hover:border-pink  duration-300"
         >
           回到首頁
         </Link>

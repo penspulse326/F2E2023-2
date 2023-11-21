@@ -1,4 +1,5 @@
-import { PieChart, Pie, Cell, Sector, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { cityChartShape, voteChartShape } from "./Shapes";
 import cityResult from "../constants/city-result-2020.json";
 
 const total = cityResult[0];
@@ -10,65 +11,28 @@ const data = [
   { name: "陳珍奶", value: data2, color: "#CEBDAD" },
 ];
 
-const renderActiveShape = (props) => {
-  const RADIAN = Math.PI / 180;
-  const {
-    cx,
-    cy,
-    midAngle,
-    outerRadius,
-    startAngle,
-    endAngle,
-    fill,
-    value,
-    name,
-  } = props;
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + (outerRadius + 2) * cos;
-  const sy = cy + (outerRadius + 2) * sin;
-  const mx = cx + (outerRadius + 25) * cos;
-  const my = cy + (outerRadius + 25) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 10;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "start" : "end";
-
-  return (
-    <g>
-      <Sector
-        cx={cx}
-        cy={cy}
-        outerRadius={outerRadius}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        fill={fill}
-        stroke="white"
-        strokeWidth="2"
-      />
-      <path d={`M${sx},${sy}L${mx},${my}`} stroke="#666666" />
-      <text
-        x={ex}
-        y={ey + sin * 3}
-        textAnchor={textAnchor}
-        fill="#666666"
-        fontSize={14}
-      >
-        {`${name} ${value}%`}
-      </text>
-    </g>
-  );
-};
+const voteData = [
+  {
+    name: "投票率",
+    value: total["投票數"] / total["選舉人數"],
+    color: "#E49794",
+  },
+  {
+    name: "未投票率",
+    value: 1 - total["投票數"] / total["選舉人數"],
+    color: "#999999",
+  },
+];
 
 const CityChart = () => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart width={300} height={200}>
+    <ResponsiveContainer width="75%" height="100%">
+      <PieChart>
         <Pie
           activeIndex={[0, 1]}
-          activeShape={renderActiveShape}
+          activeShape={cityChartShape}
           data={data}
           outerRadius={50}
-          stroke="#000000"
           dataKey="value"
           startAngle={180} // 從 180 度開始
           endAngle={-180}
@@ -84,24 +48,34 @@ const CityChart = () => {
 
 const VoteRateChart = () => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart width={300} height={200}>
-        <Pie
-          activeIndex={[0, 1]}
-          activeShape={renderActiveShape}
-          data={data}
-          outerRadius={50}
-          stroke="#000000"
-          dataKey="value"
-          startAngle={180} // 從 180 度開始
-          endAngle={-180}
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
-          ))}
-        </Pie>
-      </PieChart>
-    </ResponsiveContainer>
+    <div className="relative flex items-center w-full h-full">
+      <ResponsiveContainer width="75%" height="100%">
+        <PieChart>
+          <Pie
+            activeIndex={[0, 1]}
+            activeShape={voteChartShape}
+            data={voteData}
+            outerRadius={50}
+            dataKey="value"
+            startAngle={180} // 從 180 度開始
+            endAngle={-180}
+          >
+            {voteData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+      <div className="absolute right-10 tracking-widest">
+        <p className="mb-2">投票數 {total["投票數"].toLocaleString()}</p>
+        <p className="text-xs">
+          有效票數 {`${total["有效票數"].toLocaleString()}`}
+        </p>
+        <p className="text-xs">
+          無效票數 {`${total["無效票數"].toLocaleString()}`}
+        </p>
+      </div>
+    </div>
   );
 };
 
