@@ -72,11 +72,10 @@ export const DistrictSelector = ({ city, setDistrict }) => {
   // execute while city changed
   useEffect(() => {
     // prevent null when initializing
-    if (!city) {
-      setSelectedOption(null);
-      setDistrict(null);
-      return;
-    }
+    if (!city) return;
+
+    setSelectedOption(null);
+    setDistrict(null);
 
     setOptions(() => {
       const target = districts.filter(({ name }) => name === city)[0];

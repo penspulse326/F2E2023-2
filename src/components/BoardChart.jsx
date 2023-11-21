@@ -84,8 +84,10 @@ function BoardChart({ city, district }) {
   return (
     <div className="relative z-50 col-span-4 col-start-9 flex flex-col h-[500px]">
       {city && (
-        <p className="absolute -top-20 mb-10 text-xl">
-          您選取的是 <span className="text-pink text-[32px]">{city}</span>
+        <p className="absolute -top-20 flex items-center mb-10 text-xl">
+          您選取的是{" "}
+          <span className="ml-2 text-pink-dark text-[32px]">{city}</span>
+          <span className="ml-2 text-pink-dark text-[32px]">{district}</span>
         </p>
       )}
       <h3 className="px-4 text-xl border-l-[10px] border-pink">
