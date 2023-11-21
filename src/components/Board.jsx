@@ -20,7 +20,7 @@ function Board() {
             setDistrict={setDistrict}
           ></BoardSelector>
           <BoardMap city={city} district={district}></BoardMap>
-          <BoardChart></BoardChart>
+          <BoardChart city={city} district={district}></BoardChart>
         </div>
         <BoardLinks setCity={setCity} setDistrict={setDistrict}></BoardLinks>
       </div>
