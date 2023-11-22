@@ -20,8 +20,7 @@ export const cityChartShape = (props) => {
   const sy = cy + (outerRadius + 2) * sin;
   const mx = cx + (outerRadius + 15) * cos;
   const my = cy + (outerRadius + 15) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 10;
-  const ey = my + (cos >= 0 ? 1 * 20 : -1 * 10);
+  const ey = my + (sin >= 0 ? 1 * 20 : -1 * 10);
   const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
@@ -37,13 +36,7 @@ export const cityChartShape = (props) => {
         strokeWidth="2"
       />
       <path d={`M${sx},${sy}L${mx},${my}`} stroke="#666666" />
-      <text
-        x={ex - cos * 60}
-        y={ey}
-        textAnchor={textAnchor}
-        fill="#666666"
-        fontSize={14}
-      >
+      <text x={sx} y={ey} textAnchor={textAnchor} fill="#666666" fontSize={14}>
         {`${name} ${value}%`}
       </text>
     </g>

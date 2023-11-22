@@ -1,16 +1,10 @@
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { cityChartShape, voteChartShape } from "./Shapes";
 import cityResult from "../constants/vote-2020.json";
+import generateFormatData from "../utils/generateFormatData";
 
 const total = cityResult[0];
-const data1 = Number(((total["黃雞排"] / total["有效票數"]) * 100).toFixed(2));
-const data2 = Number(((total["陳珍奶"] / total["有效票數"]) * 100).toFixed(2));
-
-const data = [
-  { name: "黃雞排", value: data1, color: "#F9D849" },
-  { name: "陳珍奶", value: data2, color: "#CEBDAD" },
-];
 
 const voteData = [
   {
@@ -25,7 +19,9 @@ const voteData = [
   },
 ];
 
-const CityChart = () => {
+const CityChart = ({ city, district }) => {
+  const data = generateFormatData(city, district);
+
   return (
     <ResponsiveContainer width="75%" height="100%">
       <PieChart>
@@ -35,7 +31,7 @@ const CityChart = () => {
           data={data}
           outerRadius={50}
           dataKey="value"
-          startAngle={180} // 從 180 度開始
+          startAngle={180}
           endAngle={-180}
         >
           {data.map((entry, index) => (
@@ -86,14 +82,18 @@ function BoardChart({ city, district }) {
       {city && (
         <p className="absolute -top-20 flex items-center mb-10 text-xl">
           您選取的是{" "}
-          <span className="ml-2 text-pink-dark text-[32px]">{city}</span>
-          <span className="ml-2 text-pink-dark text-[32px]">{district}</span>
+          <span className="ml-2 text-pink-dark text-[32px] font-bold">
+            {city}
+          </span>
+          <span className="ml-2 text-pink-dark text-[32px] font-bold">
+            {district}
+          </span>
         </p>
       )}
       <h3 className="px-4 text-xl border-l-[10px] border-pink">
         2020 總統大選得票率
       </h3>
-      <CityChart></CityChart>
+      <CityChart city={city} district={district}></CityChart>
       <h3 className="mt-6 px-4 text-xl border-l-[10px] border-pink">
         {city ? "歷史回顧" : "2020 總統大選投票率"}
       </h3>
@@ -103,6 +103,11 @@ function BoardChart({ city, district }) {
 }
 
 BoardChart.propTypes = {
+  city: PropTypes.string,
+  district: PropTypes.string,
+};
+
+CityChart.propTypes = {
   city: PropTypes.string,
   district: PropTypes.string,
 };
