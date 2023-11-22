@@ -10,6 +10,21 @@ const customStyles = {
     borderColor: "#999999",
     borderRadius: "6px",
   }),
+  menuList: (provided) => ({
+    ...provided,
+    padding: "5px",
+    maxHeight: "500px",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    margin: "4px 0",
+    backgroundColor: state.isSelected ? "#F1CBC9" : "white",
+    borderRadius: "6px",
+    color: "#333",
+    ":hover": {
+      backgroundColor: "#F1CBC9",
+    },
+  }),
   placeholder: (styles) => ({
     ...styles,
     color: "#999999",
@@ -71,12 +86,11 @@ export const DistrictSelector = ({ city, setDistrict }) => {
 
   // execute while city changed
   useEffect(() => {
-    // prevent null when initializing
-    if (!city) {
-      setSelectedOption(null);
-      setDistrict(null);
-      return;
-    }
+    setDistrict(null);
+    setSelectedOption(null);
+
+    // prevent invalid call when initializing
+    if (!city) return;
 
     setOptions(() => {
       const target = districts.filter(({ name }) => name === city)[0];
