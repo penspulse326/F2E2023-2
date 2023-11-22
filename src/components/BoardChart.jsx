@@ -1,7 +1,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
 import { cityChartShape, voteChartShape } from "./Shapes";
-import cityResult from "../constants/city-result-2020.json";
+import cityResult from "../constants/vote-2020.json";
 
 const total = cityResult[0];
 const data1 = Number(((total["黃雞排"] / total["有效票數"]) * 100).toFixed(2));

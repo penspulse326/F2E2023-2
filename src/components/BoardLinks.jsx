@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 function BoardLinks({ setCity, setDistrict }) {
   const handleClick = () => {
-    setCity(null);
     setDistrict(null);
+    setCity(null);
   };
 
   return (

@@ -6,7 +6,7 @@ function Dashboard() {
     <div>
       <BoardNav></BoardNav>
       <div className="noisy-beige">
-        <div className="bg-radiation px-20 py-[100px] bg-cover">
+        <div className="bg-radiation px-20 py-[100px] bg-cover bg-center">
           <Board></Board>
         </div>
       </div>

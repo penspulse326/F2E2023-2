@@ -1,39 +1,49 @@
 import PropTypes from "prop-types";
 import pathData from "../constants/city-path.json";
-import cityResult from "../constants/city-result-2020.json";
+import cityResult from "../constants/vote-2020.json";
 
-const MapTaiwan = ({ city, result }) => (
-  <svg width="500" height="750" fill="none" xmlns="http://www.w3.org/2000/svg">
-    {result.map((item) => {
-      if (item["行政區別"] === "總計") return;
+const MapTaiwan = ({ city, result }) => {
+  return (
+    <svg
+      className="map-svg duration-300"
+      width="500"
+      height="750"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {result.map((item) => {
+        const thisCity = item["行政區別"];
+        const isTargetCity = thisCity === city;
 
-      const thisCity = item["行政區別"];
-      const isTarget = thisCity === city;
-      const winColor = item["陳珍奶"] > item["黃雞排"] ? "#CEBDAD" : "#F9D849";
-      const seletedColor = isTarget ? winColor : "#DBDBDB";
+        const winColor =
+          item["陳珍奶"] > item["黃雞排"] ? "#CEBDAD" : "#F9D849";
+        const seletedColor = isTargetCity ? winColor : "#DBDBDB";
 
-      const fill = city ? seletedColor : winColor;
-      const path = pathData[thisCity].d;
+        const fill = city ? seletedColor : winColor;
+        const path = pathData[thisCity].d;
 
-      return (
-        <path
-          id={thisCity}
-          key={thisCity}
-          d={path}
-          fill={fill}
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="duration-300"
-        />
-      );
-    })}
-  </svg>
-);
+        return (
+          <path
+            id={thisCity}
+            key={thisCity}
+            d={path}
+            fill={fill}
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        );
+      })}
+    </svg>
+  );
+};
 
 const MapCity = ({ city, district }) => {
-  const target = pathData[city].districts;
+  const targetPaths = pathData[city].districts;
+  const targetDatas = cityResult.filter((item) => item["行政區別"] === city)[0][
+    "各區票數"
+  ];
 
   return (
     <svg
@@ -43,22 +53,37 @@ const MapCity = ({ city, district }) => {
       height="750"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {target.map(({ name, d }) => (
-        <path
-          key={name}
-          id={name}
-          fill="#DCDBDB"
-          stroke="#FDFEFE"
-          strokeWidth="0.5"
-          d={d}
-        />
-      ))}
+      {targetPaths.map(({ name, d }, index) => {
+        const target = targetDatas.filter(
+          (item) => item["鄉鎮市區"] === name
+        )[0];
+
+        const isTargetDistrict = name === district;
+
+        const winColor =
+          target["陳珍奶"] > target["黃雞排"] ? "#CEBDAD" : "#F9D849";
+        const seletedColor = isTargetDistrict ? winColor : "#DBDBDB";
+
+        const fill = district ? seletedColor : winColor;
+
+        return (
+          <path
+            key={index + name}
+            id={name}
+            fill={fill}
+            stroke="#FDFEFE"
+            strokeWidth="0.5"
+            d={d}
+            className="map-svg duration-1000"
+          />
+        );
+      })}
     </svg>
   );
 };
 
 function BoardMap({ city, district }) {
-  const result = cityResult.filter((item) => item["行政區域"] !== "總計");
+  const result = cityResult.filter((item) => item["行政區別"] !== "總計");
 
   // if city is not selected yet, start positoin will change because svg size
   const startPosition = city
@@ -66,9 +91,11 @@ function BoardMap({ city, district }) {
     : "col-span-5 col-start-4";
 
   return (
-    <div className={`${startPosition} mt-14 mb-10`}>
+    <div className={`relative ${startPosition} mt-14 mb-10`}>
       {!city && <MapTaiwan city={city} result={result}></MapTaiwan>}
-      {city && <MapCity city={city} district={district}></MapCity>}
+      {city && (
+        <MapCity city={city} district={district} result={result}></MapCity>
+      )}
     </div>
   );
 }
