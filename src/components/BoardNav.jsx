@@ -1,13 +1,17 @@
 import { useState } from "react";
 import ImgBgMilkTea from "../assets/nav-milkTea.png";
 import ImgBgMilkTeaLg from "../assets/nav-milkTea-lg.png";
+import ImgMilkTea from "../assets/nav-character-milkTea.png";
+import ImgBgFriedChicken from "../assets/nav-friedChicken.png";
+import ImgBgFriedChickenLg from "../assets/nav-friedChicken-lg.png";
+import ImgFriedChicken from "../assets/nav-character-friedChicken.png";
 
 function ElectionNav() {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
   const containerStyle = isMouseOn ? "h-[240px]" : "h-[100px]";
-  const hoverTitleStyle = isMouseOn && "translate-y-[500px]";
-  const hoverBgStyle = isMouseOn && "translate-y-[500px]";
+  const hoverTitleStyle = isMouseOn && "translate-y-[-500px]";
+  const hoverBgStyle = isMouseOn && "translate-y-[-500px]";
 
   return (
     <nav
@@ -15,23 +19,37 @@ function ElectionNav() {
       onMouseEnter={() => setIsMouseOn(true)}
       onMouseLeave={() => setIsMouseOn(false)}
     >
-      <div className="relative flex justify-center items-center gap-6 px-[135px] w-[50%] bg-brown font-bold overflow-hidden">
-        <img
-          className={`${hoverBgStyle} absolute duration-700 `}
-          src={ImgBgMilkTea}
-          alt="bg-icon-milkTea"
-        />
-        <img
-          className={`${hoverBgStyle} absolute -top-[500px] duration-700 `}
-          src={ImgBgMilkTeaLg}
-          alt="bg-icon-milkTea"
-        />
+      <div className="relative flex justify-center  gap-6 w-[50%] bg-brown font-bold overflow-hidden">
+        <div className="absolute flex justify-center">
+          <img
+            className={`${hoverBgStyle} relative -top-10 duration-700 `}
+            src={ImgBgMilkTea}
+            alt="bg-icon-milkTea"
+          />
+          <img
+            src={ImgBgMilkTeaLg}
+            className={`${hoverBgStyle} absolute top-[500px] duration-700`}
+            alt="bg-icon-milkTea"
+          />
+          <img
+            src={ImgMilkTea}
+            className={`${hoverBgStyle} absolute top-[500px] left-40 duration-700`}
+            alt="character-milkTea"
+          />
+        </div>
         <h2
-          className={`${hoverTitleStyle} text-white text-[60px] duration-700`}
+          className={`${hoverTitleStyle} z-50 text-white text-[60px] duration-700`}
         >
           陳珍奶
         </h2>
-        <ul className="flex flex-col gap-3">
+        <ul className="relative self-center flex flex-col gap-3 duration-700">
+          <li
+            className={`${
+              !isMouseOn && "hidden"
+            } ${hoverTitleStyle} relative top-[500px]`}
+          >
+            <h2 className="text-white text-[60px] duration-700">陳珍奶</h2>
+          </li>
           <li className="flex items-center  text-xl">
             得票率<span className="ml-6 text-base">57.13%</span>
             <div className="ml-2 w-36 h-4 bg-white rounded-[10px] overflow-hidden">
@@ -43,16 +61,44 @@ function ElectionNav() {
           </li>
         </ul>
       </div>
-      <div className="flex justify-start items-center gap-6 px-[135px] w-[50%] bg-yellow font-bold">
-        <h2 className="text-white text-[60px] fontbold">黃雞排</h2>
-        <ul className="flex flex-col gap-3">
-          <li className="flex items-center  text-xl">
+      <div className="relative flex justify-center gap-6 w-[50%] bg-yellow font-bold overflow-hidden">
+        <div className="absolute flex justify-center">
+          <img
+            className={`${hoverBgStyle} relative -top-10 duration-700 `}
+            src={ImgBgFriedChicken}
+            alt="bg-icon-friedChicken"
+          />
+          <img
+            src={ImgBgFriedChickenLg}
+            className={`${hoverBgStyle} absolute top-[500px] scale-110 duration-700`}
+            alt="bg-icon-friedChicken"
+          />
+          <img
+            src={ImgFriedChicken}
+            className={`${hoverBgStyle} absolute top-[500px] left-40 duration-700`}
+            alt="character-friedChicken"
+          />
+        </div>
+        <h2
+          className={`${hoverTitleStyle} z-50 text-white text-[60px] duration-700`}
+        >
+          黃雞排
+        </h2>
+        <ul className="relative self-center flex flex-col gap-3 duration-700">
+          <li
+            className={`${
+              !isMouseOn && "hidden"
+            } ${hoverTitleStyle} relative top-[500px]`}
+          >
+            <h2 className="text-white text-[60px] duration-700">黃雞排</h2>
+          </li>
+          <li className="flex items-center text-xl duration-700">
             得票率<span className="ml-6 text-base">38.61%</span>
             <div className="ml-2 w-36 h-4 bg-white rounded-[10px] overflow-hidden">
               <div className="w-[38.61%] h-full bg-brown-dark"></div>
             </div>
           </li>
-          <li className="flex items-center  text-xl">
+          <li className="flex items-center text-xl duration-700">
             得票數<span className="ml-6 text-base">5,522,119</span>
           </li>
         </ul>

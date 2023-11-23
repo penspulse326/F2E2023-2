@@ -46,39 +46,42 @@ const MapCity = ({ city, district }) => {
   ];
 
   return (
-    <svg
-      version="1.1"
-      fill="none"
-      width="100%"
-      height="750"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {targetPaths.map(({ name, d }, index) => {
-        const target = targetDatas.filter(
-          (item) => item["鄉鎮市區"] === name
-        )[0];
+    <>
+      <svg
+        version="1.1"
+        fill="none"
+        width="100%"
+        height="750"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {targetPaths.map(({ name, d }, index) => {
+          const target = targetDatas.filter(
+            (item) => item["鄉鎮市區"] === name
+          )[0];
 
-        const isTargetDistrict = name === district;
+          const isTargetDistrict = name === district;
 
-        const winColor =
-          target["陳珍奶"] > target["黃雞排"] ? "#CEBDAD" : "#F9D849";
-        const seletedColor = isTargetDistrict ? winColor : "#DBDBDB";
+          const winColor =
+            target["陳珍奶"] > target["黃雞排"] ? "#CEBDAD" : "#F9D849";
+          const seletedColor = isTargetDistrict ? winColor : "#DBDBDB";
 
-        const fill = district ? seletedColor : winColor;
+          const fill = district ? seletedColor : winColor;
 
-        return (
-          <path
-            key={index + name}
-            id={name}
-            fill={fill}
-            stroke="#FDFEFE"
-            strokeWidth="0.5"
-            d={d}
-            className="map-svg duration-1000"
-          />
-        );
-      })}
-    </svg>
+          return (
+            <g key={index + name}>
+              <path
+                id={name}
+                fill={fill}
+                stroke="#FDFEFE"
+                strokeWidth="0.5"
+                d={d}
+                className="map-svg duration-1000"
+              />
+            </g>
+          );
+        })}
+      </svg>
+    </>
   );
 };
 
