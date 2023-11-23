@@ -28,12 +28,12 @@ function ElectionNav() {
           />
           <img
             src={ImgBgMilkTeaLg}
-            className={`${hoverBgStyle} absolute top-[500px] duration-700`}
+            className={`${hoverBgStyle} absolute top-[500px] scale-105 duration-700`}
             alt="bg-icon-milkTea"
           />
           <img
             src={ImgMilkTea}
-            className={`${hoverBgStyle} absolute top-[500px] left-40 duration-700`}
+            className={`${hoverBgStyle} absolute top-[520px] left-40 duration-700`}
             alt="character-milkTea"
           />
         </div>
@@ -70,12 +70,12 @@ function ElectionNav() {
           />
           <img
             src={ImgBgFriedChickenLg}
-            className={`${hoverBgStyle} absolute top-[500px] scale-110 duration-700`}
+            className={`${hoverBgStyle} absolute top-[480px] scale-[1.15] duration-700`}
             alt="bg-icon-friedChicken"
           />
           <img
             src={ImgFriedChicken}
-            className={`${hoverBgStyle} absolute top-[500px] left-40 duration-700`}
+            className={`${hoverBgStyle} absolute top-[520px] left-40 duration-700`}
             alt="character-friedChicken"
           />
         </div>
