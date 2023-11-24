@@ -9,13 +9,14 @@ function BoardSelector({ city, setCity, setDistrict }) {
       </h3>
       <ul className="flex justify-between gap-4 mt-6">
         <li className="w-full">
-          <CitySelector city={city} setCity={setCity}></CitySelector>
+          <CitySelector
+            city={city}
+            setCity={setCity}
+            setDistrict={setDistrict}
+          />
         </li>
         <li className="w-full">
-          <DistrictSelector
-            city={city}
-            setDistrict={setDistrict}
-          ></DistrictSelector>
+          <DistrictSelector city={city} setDistrict={setDistrict} />
         </li>
       </ul>
     </div>

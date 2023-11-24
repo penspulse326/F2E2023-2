@@ -13,16 +13,16 @@ function Board() {
     <section className="relative px-20 py-[60px] bg-white rounded-[50px]">
       <div className="flex justify-center">
         <div className="flex-grow grid grid-cols-12 gap-6 max-w-[1296px] items-center">
-          <BoardTitle></BoardTitle>
+          <BoardTitle />
           <BoardSelector
             city={city}
             setCity={setCity}
             setDistrict={setDistrict}
-          ></BoardSelector>
-          <BoardMap city={city} district={district}></BoardMap>
-          <BoardChart city={city} district={district}></BoardChart>
+          />
+          <BoardMap city={city} district={district} />
+          <BoardChart city={city} district={district} />
         </div>
-        <BoardLinks setCity={setCity} setDistrict={setDistrict}></BoardLinks>
+        <BoardLinks setCity={setCity} setDistrict={setDistrict} />
       </div>
     </section>
   );

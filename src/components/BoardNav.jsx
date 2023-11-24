@@ -19,7 +19,7 @@ function ElectionNav() {
       onMouseEnter={() => setIsMouseOn(true)}
       onMouseLeave={() => setIsMouseOn(false)}
     >
-      <div className="relative flex justify-center  gap-6 w-[50%] bg-brown font-bold overflow-hidden">
+      <div className="relative flex justify-center gap-6 w-[50%] bg-brown font-bold overflow-hidden">
         <div className="absolute flex justify-center">
           <img
             className={`${hoverBgStyle} relative -top-10 duration-700 `}

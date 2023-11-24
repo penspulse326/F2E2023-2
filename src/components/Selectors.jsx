@@ -5,10 +5,14 @@ import districts from "../constants/districts.json";
 
 // styles for react-select
 const customStyles = {
-  control: (styles) => ({
+  control: (styles, state) => ({
     ...styles,
-    borderColor: "#999999",
+    borderColor: state.isFocused ? "#D67A7A" : "#999999",
     borderRadius: "6px",
+    boxShadow: "none",
+    "&:hover": {
+      boxShadow: "0 0 0px 2px #D67A7A",
+    },
   }),
   menuList: (provided) => ({
     ...provided,
@@ -51,7 +55,7 @@ const DropdownIndicator = () => (
   </div>
 );
 
-export const CitySelector = ({ city, setCity }) => {
+export const CitySelector = ({ city, setCity, setDistrict }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const cityOptions = districts.map(({ name }) => ({
@@ -65,6 +69,7 @@ export const CitySelector = ({ city, setCity }) => {
 
   const handleChange = (choice) => {
     setCity(choice.value);
+    setDistrict(null);
     setSelectedOption(choice);
   };
 
@@ -86,7 +91,6 @@ export const DistrictSelector = ({ city, setDistrict }) => {
 
   // execute while city changed
   useEffect(() => {
-    setDistrict(null);
     setSelectedOption(null);
 
     // prevent invalid call when initializing
@@ -123,6 +127,7 @@ export const DistrictSelector = ({ city, setDistrict }) => {
 CitySelector.propTypes = {
   city: PropTypes.string,
   setCity: PropTypes.func.isRequired,
+  setDistrict: PropTypes.func.isRequired,
 };
 DistrictSelector.propTypes = {
   city: PropTypes.string,

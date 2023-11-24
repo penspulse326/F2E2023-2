@@ -4,12 +4,21 @@ const formatNumber = (data) => [
   Number(((data["黃雞排"] / data["有效票數"]) * 100).toFixed(2)),
   Number(((data["陳珍奶"] / data["有效票數"]) * 100).toFixed(2)),
 ];
-const generateFormatData = (city = null, district = null) => {
+
+const formatData = (city = null, district = null) => {
   let target = voteData[0];
 
-  if (city && !district) {
+  if (city) {
     target = voteData.filter((item) => item["行政區別"] === city)[0];
   }
+
+  if (district) {
+    target = target["各區票數"].filter(
+      (item) => item["鄉鎮市區"] === district
+    )[0];
+  }
+
+  console.log(city, district);
 
   const values = formatNumber(target);
 
@@ -19,4 +28,4 @@ const generateFormatData = (city = null, district = null) => {
   ];
 };
 
-export default generateFormatData;
+export default formatData;

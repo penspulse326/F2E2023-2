@@ -1,41 +1,90 @@
 import PropTypes from "prop-types";
 import pathData from "../constants/city-path.json";
 import cityResult from "../constants/vote-2020.json";
+import { useState, useEffect } from "react";
+
+const MapTag = ({ name, color }) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setPosition({ x: event.pageX, y: event.pageY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: position.x - 75,
+        top: position.y - 225,
+        background: color,
+      }}
+    >
+      {name}
+    </div>
+  );
+};
 
 const MapTaiwan = ({ city, result }) => {
+  const [isHover, setIsHover] = useState(false);
+  const [tagColor, setTagColor] = useState("black");
+  const [tagName, setTagName] = useState("");
+
+  const handleMouseEnter = (name, color) => {
+    setTagColor(color);
+    setIsHover(true);
+    setTagName(name);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHover(false);
+  };
+
   return (
-    <svg
-      className="map-svg duration-300"
-      width="500"
-      height="750"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {result.map((item) => {
-        const thisCity = item["行政區別"];
-        const isTargetCity = thisCity === city;
+    <>
+      {isHover && <MapTag name={tagName} color={tagColor} />}
+      <svg
+        className="map-svg duration-300"
+        width="500"
+        height="750"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {result.map((item) => {
+          const thisCity = item["行政區別"];
+          const isTargetCity = thisCity === city;
 
-        const winColor =
-          item["陳珍奶"] > item["黃雞排"] ? "#CEBDAD" : "#F9D849";
-        const seletedColor = isTargetCity ? winColor : "#DBDBDB";
+          const winColor =
+            item["陳珍奶"] > item["黃雞排"] ? "#CEBDAD" : "#F9D849";
+          const seletedColor = isTargetCity ? winColor : "#DBDBDB";
 
-        const fill = city ? seletedColor : winColor;
-        const path = pathData[thisCity].d;
+          const fill = city ? seletedColor : winColor;
+          const path = pathData[thisCity].d;
 
-        return (
-          <path
-            id={thisCity}
-            key={thisCity}
-            d={path}
-            fill={fill}
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        );
-      })}
-    </svg>
+          return (
+            <path
+              id={thisCity}
+              key={thisCity}
+              d={path}
+              fill={fill}
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              onMouseEnter={() => handleMouseEnter(thisCity, fill)}
+              onMouseLeave={() => handleMouseLeave()}
+            />
+          );
+        })}
+      </svg>
+    </>
   );
 };
 
@@ -94,7 +143,7 @@ function BoardMap({ city, district }) {
     : "col-span-5 col-start-4";
 
   return (
-    <div className={`relative ${startPosition} mt-14 mb-10`}>
+    <div className={`${startPosition} mt-14 mb-10`}>
       {!city && <MapTaiwan city={city} result={result}></MapTaiwan>}
       {city && (
         <MapCity city={city} district={district} result={result}></MapCity>

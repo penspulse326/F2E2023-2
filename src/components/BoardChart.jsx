@@ -2,25 +2,10 @@ import PropTypes from "prop-types";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { cityChartShape, voteChartShape } from "./Shapes";
 import cityResult from "../constants/vote-2020.json";
-import generateFormatData from "../utils/generateFormatData";
-
-const total = cityResult[0];
-
-const voteData = [
-  {
-    name: "投票率",
-    value: total["投票數"] / total["選舉人數"],
-    color: "#E49794",
-  },
-  {
-    name: "未投票率",
-    value: 1 - total["投票數"] / total["選舉人數"],
-    color: "#999999",
-  },
-];
+import formatData from "../utils/formatData";
 
 const CityChart = ({ city, district }) => {
-  const data = generateFormatData(city, district);
+  const data = formatData(city, district);
 
   return (
     <ResponsiveContainer width="75%" height="100%">
@@ -44,8 +29,23 @@ const CityChart = ({ city, district }) => {
 };
 
 const VoteRateChart = () => {
+  const total = cityResult[0];
+
+  const voteData = [
+    {
+      name: "投票率",
+      value: total["投票數"] / total["選舉人數"],
+      color: "#E49794",
+    },
+    {
+      name: "未投票率",
+      value: 1 - total["投票數"] / total["選舉人數"],
+      color: "#999999",
+    },
+  ];
+
   return (
-    <div className="relative flex items-center w-full h-full">
+    <>
       <ResponsiveContainer width="75%" height="100%">
         <PieChart>
           <Pie
@@ -72,7 +72,7 @@ const VoteRateChart = () => {
           無效票數 {`${total["無效票數"].toLocaleString()}`}
         </p>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -93,11 +93,13 @@ function BoardChart({ city, district }) {
       <h3 className="px-4 text-xl border-l-[10px] border-pink">
         2020 總統大選得票率
       </h3>
-      <CityChart city={city} district={district}></CityChart>
+      <CityChart city={city} district={district} />
       <h3 className="mt-6 px-4 text-xl border-l-[10px] border-pink">
         {city ? "歷史回顧" : "2020 總統大選投票率"}
       </h3>
-      <VoteRateChart></VoteRateChart>
+      <div className="relative flex items-center w-full h-full">
+        {!city && <VoteRateChart />}
+      </div>
     </div>
   );
 }
