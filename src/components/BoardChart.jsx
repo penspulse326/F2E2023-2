@@ -99,8 +99,7 @@ const HistoryChart = ({ city }) => {
     width: 300,
     height: 300,
     margin: {
-      top: 20,
-      right: 30,
+      right: 20,
       left: 20,
     },
   };
@@ -140,8 +139,13 @@ function BoardChart({ city, district }) {
       </h3>
       <CityChart city={city} district={district} />
       <h3 className="mt-6 px-4 text-xl border-l-[10px] border-pink">
-        {city ? "歷史回顧" : "2020 總統大選投票率"}
+        {city ? `歷史回顧 ${city}` : "2020 總統大選投票率"}
       </h3>
+      {city && (
+        <p className="mt-4 mb-9">
+          過去是哪個政黨贏 ? <span className="text-pink">2020 翻盤縣市!</span>
+        </p>
+      )}
       <div className="relative flex items-center w-full h-full">
         {city ? <HistoryChart city={city} /> : <VoteRateChart />}
       </div>

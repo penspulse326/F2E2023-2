@@ -93,12 +93,10 @@ export const DistrictSelector = ({ city, district, setDistrict }) => {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  // execute while city changed
   useEffect(() => {
     setSelectedOption(null);
 
-    // prevent invalid call when initializing
-    if (!city) return;
+    if (!city) return; // prevent invalid call when initializing
 
     setOptions(() => {
       const target = districts.filter(({ name }) => name === city)[0];
@@ -111,6 +109,10 @@ export const DistrictSelector = ({ city, district, setDistrict }) => {
   }, [city]);
 
   useEffect(() => {
+    if (!district) {
+      setSelectedOption(null);
+      return;
+    }
     setSelectedOption({ value: district, label: district });
   }, [district]);
 
