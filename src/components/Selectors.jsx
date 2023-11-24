@@ -5,10 +5,14 @@ import districts from "../constants/districts.json";
 
 // styles for react-select
 const customStyles = {
-  control: (styles) => ({
+  control: (styles, state) => ({
     ...styles,
-    borderColor: "#999999",
+    borderColor: state.isFocused ? "#D67A7A" : "#999999",
     borderRadius: "6px",
+    boxShadow: "none",
+    "&:hover": {
+      boxShadow: "0 0 0px 2px #D67A7A",
+    },
   }),
   menuList: (provided) => ({
     ...provided,
@@ -51,7 +55,7 @@ const DropdownIndicator = () => (
   </div>
 );
 
-export const CitySelector = ({ city, setCity }) => {
+export const CitySelector = ({ city, setCity, setDistrict }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const cityOptions = districts.map(({ name }) => ({
@@ -60,10 +64,15 @@ export const CitySelector = ({ city, setCity }) => {
   }));
 
   useEffect(() => {
-    if (!city) setSelectedOption(null);
+    if (!city) {
+      setSelectedOption(null);
+      return;
+    }
+    setSelectedOption({ value: city, label: city });
   }, [city]);
 
   const handleChange = (choice) => {
+    setDistrict(null);
     setCity(choice.value);
     setSelectedOption(choice);
   };
@@ -80,17 +89,14 @@ export const CitySelector = ({ city, setCity }) => {
   );
 };
 
-export const DistrictSelector = ({ city, setDistrict }) => {
+export const DistrictSelector = ({ city, district, setDistrict }) => {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  // execute while city changed
   useEffect(() => {
-    setDistrict(null);
     setSelectedOption(null);
 
-    // prevent invalid call when initializing
-    if (!city) return;
+    if (!city) return; // prevent invalid call when initializing
 
     setOptions(() => {
       const target = districts.filter(({ name }) => name === city)[0];
@@ -101,6 +107,14 @@ export const DistrictSelector = ({ city, setDistrict }) => {
       }));
     });
   }, [city]);
+
+  useEffect(() => {
+    if (!district) {
+      setSelectedOption(null);
+      return;
+    }
+    setSelectedOption({ value: district, label: district });
+  }, [district]);
 
   const handleChange = (choice) => {
     setDistrict(choice.value);
@@ -123,8 +137,10 @@ export const DistrictSelector = ({ city, setDistrict }) => {
 CitySelector.propTypes = {
   city: PropTypes.string,
   setCity: PropTypes.func.isRequired,
+  setDistrict: PropTypes.func.isRequired,
 };
 DistrictSelector.propTypes = {
   city: PropTypes.string,
+  district: PropTypes.string,
   setDistrict: PropTypes.func.isRequired,
 };

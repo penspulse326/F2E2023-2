@@ -1,31 +1,22 @@
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import { cityChartShape, voteChartShape } from "./Shapes";
 import cityResult from "../constants/vote-2020.json";
+import { formatVoteData, formatHistoryData } from "../utils/formatData";
 
-const total = cityResult[0];
-const data1 = Number(((total["黃雞排"] / total["有效票數"]) * 100).toFixed(2));
-const data2 = Number(((total["陳珍奶"] / total["有效票數"]) * 100).toFixed(2));
+const CityChart = ({ city, district }) => {
+  const data = formatVoteData(city, district);
 
-const data = [
-  { name: "黃雞排", value: data1, color: "#F9D849" },
-  { name: "陳珍奶", value: data2, color: "#CEBDAD" },
-];
-
-const voteData = [
-  {
-    name: "投票率",
-    value: total["投票數"] / total["選舉人數"],
-    color: "#E49794",
-  },
-  {
-    name: "未投票率",
-    value: 1 - total["投票數"] / total["選舉人數"],
-    color: "#999999",
-  },
-];
-
-const CityChart = () => {
   return (
     <ResponsiveContainer width="75%" height="100%">
       <PieChart>
@@ -35,7 +26,7 @@ const CityChart = () => {
           data={data}
           outerRadius={50}
           dataKey="value"
-          startAngle={180} // 從 180 度開始
+          startAngle={180}
           endAngle={-180}
         >
           {data.map((entry, index) => (
@@ -48,8 +39,23 @@ const CityChart = () => {
 };
 
 const VoteRateChart = () => {
+  const total = cityResult[0];
+
+  const voteData = [
+    {
+      name: "投票率",
+      value: total["投票數"] / total["選舉人數"],
+      color: "#E49794",
+    },
+    {
+      name: "未投票率",
+      value: 1 - total["投票數"] / total["選舉人數"],
+      color: "#999999",
+    },
+  ];
+
   return (
-    <div className="relative flex items-center w-full h-full">
+    <>
       <ResponsiveContainer width="75%" height="100%">
         <PieChart>
           <Pie
@@ -76,7 +82,41 @@ const VoteRateChart = () => {
           無效票數 {`${total["無效票數"].toLocaleString()}`}
         </p>
       </div>
-    </div>
+    </>
+  );
+};
+
+const HistoryChart = ({ city }) => {
+  const data = formatHistoryData(city);
+
+  const legendProps = {
+    wrapperStyle: { top: "200px" },
+    formatter: (value) => <span className="text-gray-80 text-sm">{value}</span>,
+  };
+
+  const barStyle = {
+    data,
+    width: 300,
+    height: 300,
+    margin: {
+      right: 20,
+      left: 20,
+    },
+  };
+
+  return (
+    <ResponsiveContainer width="75%" height="100%">
+      <BarChart {...barStyle}>
+        <Tooltip
+          cursor={{ fill: "white" }}
+          formatter={(value) => `${value}%`}
+        />
+        <Legend {...legendProps} />
+        <Bar dataKey="陳珍奶" stackId="a" fill=" #CEBDAD" barSize={32} />
+        <Bar dataKey="黃雞排" stackId="a" fill="#F9D849" barSize={32} />
+        <XAxis dataKey="name" tickFormatter={(value) => `${value}\n年`} />
+      </BarChart>
+    </ResponsiveContainer>
   );
 };
 
@@ -86,23 +126,43 @@ function BoardChart({ city, district }) {
       {city && (
         <p className="absolute -top-20 flex items-center mb-10 text-xl">
           您選取的是{" "}
-          <span className="ml-2 text-pink-dark text-[32px]">{city}</span>
-          <span className="ml-2 text-pink-dark text-[32px]">{district}</span>
+          <span className="ml-2 text-pink-dark text-[32px] font-bold">
+            {city}
+          </span>
+          <span className="ml-2 text-pink-dark text-[32px] font-bold">
+            {district}
+          </span>
         </p>
       )}
       <h3 className="px-4 text-xl border-l-[10px] border-pink">
         2020 總統大選得票率
       </h3>
-      <CityChart></CityChart>
+      <CityChart city={city} district={district} />
       <h3 className="mt-6 px-4 text-xl border-l-[10px] border-pink">
-        {city ? "歷史回顧" : "2020 總統大選投票率"}
+        {city ? `歷史回顧 ${city}` : "2020 總統大選投票率"}
       </h3>
-      <VoteRateChart></VoteRateChart>
+      {city && (
+        <p className="mt-4 mb-9">
+          過去是哪個政黨贏 ? <span className="text-pink">2020 翻盤縣市!</span>
+        </p>
+      )}
+      <div className="relative flex items-center w-full h-full">
+        {city ? <HistoryChart city={city} /> : <VoteRateChart />}
+      </div>
     </div>
   );
 }
 
 BoardChart.propTypes = {
+  city: PropTypes.string,
+  district: PropTypes.string,
+};
+
+HistoryChart.propTypes = {
+  city: PropTypes.string,
+};
+
+CityChart.propTypes = {
   city: PropTypes.string,
   district: PropTypes.string,
 };

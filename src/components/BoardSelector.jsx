@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { CitySelector, DistrictSelector } from "./Selectors";
 
-function BoardSelector({ city, setCity, setDistrict }) {
+function BoardSelector({ city, setCity, district, setDistrict }) {
   return (
     <div className="col-span-4 col-start-5 self-center mt-8">
       <h3 className="text-2xl text-center font-bold tracking-wider">
@@ -9,13 +9,18 @@ function BoardSelector({ city, setCity, setDistrict }) {
       </h3>
       <ul className="flex justify-between gap-4 mt-6">
         <li className="w-full">
-          <CitySelector city={city} setCity={setCity}></CitySelector>
+          <CitySelector
+            city={city}
+            setCity={setCity}
+            setDistrict={setDistrict}
+          />
         </li>
         <li className="w-full">
           <DistrictSelector
             city={city}
+            district={district}
             setDistrict={setDistrict}
-          ></DistrictSelector>
+          />
         </li>
       </ul>
     </div>
@@ -25,6 +30,7 @@ function BoardSelector({ city, setCity, setDistrict }) {
 BoardSelector.propTypes = {
   city: PropTypes.string,
   setCity: PropTypes.func.isRequired,
+  district: PropTypes.string,
   setDistrict: PropTypes.func.isRequired,
 };
 
