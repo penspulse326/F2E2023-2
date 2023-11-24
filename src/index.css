@@ -65,7 +65,7 @@
 }
 
 .map-svg {
-  animation: fade 0.5s linear;
+  animation: fade 0.3s linear;
 }
 
 @keyframes slide {

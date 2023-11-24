@@ -17,9 +17,15 @@ function Board() {
           <BoardSelector
             city={city}
             setCity={setCity}
+            district={district}
             setDistrict={setDistrict}
           />
-          <BoardMap city={city} district={district} />
+          <BoardMap
+            city={city}
+            setCity={setCity}
+            district={district}
+            setDistrict={setDistrict}
+          />
           <BoardChart city={city} district={district} />
         </div>
         <BoardLinks setCity={setCity} setDistrict={setDistrict} />

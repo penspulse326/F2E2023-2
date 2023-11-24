@@ -64,12 +64,16 @@ export const CitySelector = ({ city, setCity, setDistrict }) => {
   }));
 
   useEffect(() => {
-    if (!city) setSelectedOption(null);
+    if (!city) {
+      setSelectedOption(null);
+      return;
+    }
+    setSelectedOption({ value: city, label: city });
   }, [city]);
 
   const handleChange = (choice) => {
-    setCity(choice.value);
     setDistrict(null);
+    setCity(choice.value);
     setSelectedOption(choice);
   };
 
@@ -85,7 +89,7 @@ export const CitySelector = ({ city, setCity, setDistrict }) => {
   );
 };
 
-export const DistrictSelector = ({ city, setDistrict }) => {
+export const DistrictSelector = ({ city, district, setDistrict }) => {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -105,6 +109,10 @@ export const DistrictSelector = ({ city, setDistrict }) => {
       }));
     });
   }, [city]);
+
+  useEffect(() => {
+    setSelectedOption({ value: district, label: district });
+  }, [district]);
 
   const handleChange = (choice) => {
     setDistrict(choice.value);
@@ -131,5 +139,6 @@ CitySelector.propTypes = {
 };
 DistrictSelector.propTypes = {
   city: PropTypes.string,
+  district: PropTypes.string,
   setDistrict: PropTypes.func.isRequired,
 };
