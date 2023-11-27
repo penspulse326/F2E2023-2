@@ -1,14 +1,15 @@
-import Board from "../components/Board";
-import BoardNav from "../components/BoardNav";
+import { CityContextProvider } from "../contexts/CityContext";
+import BoardNav from "../components/Board/BoardNav";
+import BoardWrapper from "../components/Board";
 
 function Dashboard() {
   return (
-    <div>
+    <div className="noisy-beige">
       <BoardNav></BoardNav>
-      <div className="noisy-beige">
-        <div className="bg-radiation px-20 py-[100px] bg-cover bg-center">
-          <Board></Board>
-        </div>
+      <div className="bg-radiation px-20 py-[100px] bg-cover bg-center">
+        <CityContextProvider>
+          <BoardWrapper />
+        </CityContextProvider>
       </div>
     </div>
   );

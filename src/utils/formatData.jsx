@@ -7,17 +7,19 @@ const formatNumber = (data) => [
   Number(((data["陳珍奶"] / data["有效票數"]) * 100).toFixed(2)),
 ];
 
-export const formatVoteData = (city = null, district = null) => {
+const getTargetData = (dataArray, key, value) => {
+  return dataArray.filter((item) => item[key] === value)[0];
+};
+
+export const formatVoteData = (city, district) => {
   let target = voteData_2020[0];
 
   if (city) {
-    target = voteData_2020.filter((item) => item["行政區別"] === city)[0];
+    target = getTargetData(voteData_2020, "行政區別", city);
   }
 
   if (district) {
-    target = target["各區票數"].filter(
-      (item) => item["鄉鎮市區"] === district
-    )[0];
+    target = getTargetData(target["各區票數"], "鄉鎮市區", district);
   }
 
   const values = formatNumber(target);
@@ -29,29 +31,17 @@ export const formatVoteData = (city = null, district = null) => {
 };
 
 export const formatHistoryData = (city) => {
-  const data1 = voteData_2020.filter((item) => item["行政區別"] === city)[0];
-  const data2 = voteData_2016.filter((item) => item["行政區別"] === city)[0];
-  const data3 = voteData_2012.filter((item) => item["行政區別"] === city)[0];
+  const years = [`2020`, "2016", "2012"];
+  const dataArrays = [voteData_2020, voteData_2016, voteData_2012];
 
-  const valueArr1 = formatNumber(data1);
-  const valueArr2 = formatNumber(data2);
-  const valueArr3 = formatNumber(data3);
+  return years.map((year, index) => {
+    const data = getTargetData(dataArrays[index], "行政區別", city);
+    const values = formatNumber(data);
 
-  return [
-    {
-      name: `2020`,
-      黃雞排: valueArr1[0],
-      陳珍奶: valueArr1[1],
-    },
-    {
-      name: "2016",
-      黃雞排: valueArr2[0],
-      陳珍奶: valueArr2[1],
-    },
-    {
-      name: "2012",
-      黃雞排: valueArr3[0],
-      陳珍奶: valueArr3[1],
-    },
-  ];
+    return {
+      name: year,
+      黃雞排: values[0],
+      陳珍奶: values[1],
+    };
+  });
 };

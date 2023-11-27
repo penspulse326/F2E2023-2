@@ -1,38 +1,14 @@
-import PropTypes from "prop-types";
-import pathData from "../constants/city-path.json";
-import cityResult from "../constants/vote-2020.json";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import CityContext from "../../contexts/CityContext";
+import pathData from "../../constants/city-path.json";
+import cityResult from "../../constants/vote-2020.json";
+import MapTag from "../MapTag";
 
-const MapTag = ({ name, color }) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+const MapTaiwan = () => {
+  const result = cityResult.filter((item) => item["行政區別"] !== "總計");
 
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      setPosition({ x: event.pageX, y: event.pageY });
-    };
+  const { setCity } = useContext(CityContext);
 
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
-  return (
-    <div
-      style={{
-        left: position.x - 75,
-        top: position.y - 235,
-        background: color,
-      }}
-      className="absolute px-2 py-1 rounded-tl-[10px] rounded-tr-[10px] rounded-br-[10px] shadow-md border border-white"
-    >
-      {name}
-    </div>
-  );
-};
-
-const MapTaiwan = ({ result, setCity }) => {
   const [isHover, setIsHover] = useState(false);
   const [tagColor, setTagColor] = useState("#FFF");
   const [tagName, setTagName] = useState("");
@@ -90,7 +66,9 @@ const MapTaiwan = ({ result, setCity }) => {
   );
 };
 
-const MapCity = ({ city, district, setDistrict }) => {
+const MapCity = () => {
+  const { city, district, setDistrict } = useContext(CityContext);
+
   const [isHover, setIsHover] = useState(false);
   const [tagColor, setTagColor] = useState("#FFF");
   const [tagName, setTagName] = useState("");
@@ -155,51 +133,17 @@ const MapCity = ({ city, district, setDistrict }) => {
   );
 };
 
-function BoardMap({ city, district, setCity, setDistrict }) {
-  const result = cityResult.filter((item) => item["行政區別"] !== "總計");
+function BoardMap() {
+  const { city } = useContext(CityContext);
 
   // if city is not selected yet, start positoin will change because svg size
-  const startPosition = city
-    ? "col-span-6 col-start-3"
-    : "col-span-5 col-start-4";
+  const boardStyles = city
+    ? "col-span-6 col-start-3 mt-14 mb-10"
+    : "col-span-5 col-start-4 mt-14 mb-10";
 
   return (
-    <div className={`${startPosition} mt-14 mb-10`}>
-      {!city && (
-        <MapTaiwan city={city} result={result} setCity={setCity}></MapTaiwan>
-      )}
-      {city && (
-        <MapCity
-          city={city}
-          district={district}
-          setDistrict={setDistrict}
-        ></MapCity>
-      )}
-    </div>
+    <div className={boardStyles}>{city ? <MapCity /> : <MapTaiwan />}</div>
   );
 }
-
-BoardMap.propTypes = {
-  city: PropTypes.string,
-  setCity: PropTypes.func,
-  district: PropTypes.string,
-  setDistrict: PropTypes.func,
-};
-
-MapTaiwan.propTypes = {
-  setCity: PropTypes.func,
-  result: PropTypes.array,
-};
-
-MapCity.propTypes = {
-  city: PropTypes.string,
-  district: PropTypes.string,
-  setDistrict: PropTypes.func,
-};
-
-MapTag.propTypes = {
-  name: PropTypes.string,
-  color: PropTypes.string,
-};
 
 export default BoardMap;

@@ -1,7 +1,10 @@
-import PropTypes from "prop-types";
-import { CitySelector, DistrictSelector } from "./Selectors";
+import { useContext } from "react";
+import { CitySelector, DistrictSelector } from "../Selectors";
+import CityContext from "../../contexts/CityContext";
 
-function BoardSelector({ city, setCity, district, setDistrict }) {
+function BoardSelector() {
+  const { city, setCity, district, setDistrict } = useContext(CityContext);
+
   return (
     <div className="col-span-4 col-start-5 self-center mt-8">
       <h3 className="text-2xl text-center font-bold tracking-wider">
@@ -26,12 +29,5 @@ function BoardSelector({ city, setCity, district, setDistrict }) {
     </div>
   );
 }
-
-BoardSelector.propTypes = {
-  city: PropTypes.string,
-  setCity: PropTypes.func.isRequired,
-  district: PropTypes.string,
-  setDistrict: PropTypes.func.isRequired,
-};
 
 export default BoardSelector;

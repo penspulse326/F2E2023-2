@@ -1,12 +1,12 @@
 import { useState } from "react";
-import ImgBgMilkTea from "../assets/nav-milkTea.png";
-import ImgBgMilkTeaLg from "../assets/nav-milkTea-lg.png";
-import ImgMilkTea from "../assets/nav-character-milkTea.png";
-import ImgBgFriedChicken from "../assets/nav-friedChicken.png";
-import ImgBgFriedChickenLg from "../assets/nav-friedChicken-lg.png";
-import ImgFriedChicken from "../assets/nav-character-friedChicken.png";
+import ImgBgMilkTea from "../../assets/nav-milkTea.png";
+import ImgBgMilkTeaLg from "../../assets/nav-milkTea-lg.png";
+import ImgMilkTea from "../../assets/nav-character-milkTea.png";
+import ImgBgFriedChicken from "../../assets/nav-friedChicken.png";
+import ImgBgFriedChickenLg from "../../assets/nav-friedChicken-lg.png";
+import ImgFriedChicken from "../../assets/nav-character-friedChicken.png";
 
-function ElectionNav() {
+function BoardNav() {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
   const containerStyle = isMouseOn ? "h-[240px]" : "h-[100px]";
@@ -107,4 +107,4 @@ function ElectionNav() {
   );
 }
 
-export default ElectionNav;
+export default BoardNav;

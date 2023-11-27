@@ -59,9 +59,6 @@ function Home() {
             src={ImgCharacterMilkTea}
             alt="陳珍奶"
           />
-          <h2 className="character-name absolute -top-20 bg-brown-dark text-white text-4xl duration-300">
-            陳珍奶
-          </h2>
         </li>
         <li className="card-home relative flex flex-col justify-end items-center rounded-[50px] overflow-hidden">
           <img
@@ -74,9 +71,6 @@ function Home() {
             src={ImgCharacterFriedChicken}
             alt="黃雞排"
           />
-          <h2 className="character-name  absolute -top-20 bg-orange text-white text-4xl duration-300">
-            黃雞排
-          </h2>
         </li>
       </ul>
       <ul>
