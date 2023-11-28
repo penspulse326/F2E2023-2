@@ -1,6 +1,6 @@
 import BoardTitle from "./BoardTitle";
-import BoardLinks from "./BoardLinks";
 import BoardSelector from "./BoardSelector";
+import BoardLinks from "./BoardLinks";
 import BoardMap from "./BoardMap";
 import BoardChart from "./BoardChart";
 

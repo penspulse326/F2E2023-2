@@ -6,7 +6,6 @@ import MapTag from "../MapTag";
 
 const MapTaiwan = () => {
   const result = cityResult.filter((item) => item["行政區別"] !== "總計");
-
   const { setCity } = useContext(CityContext);
 
   const [isHover, setIsHover] = useState(false);

@@ -1,10 +1,6 @@
-import { useContext } from "react";
 import { CitySelector, DistrictSelector } from "../Selectors";
-import CityContext from "../../contexts/CityContext";
 
 function BoardSelector() {
-  const { city, setCity, district, setDistrict } = useContext(CityContext);
-
   return (
     <div className="col-span-4 col-start-5 self-center mt-8">
       <h3 className="text-2xl text-center font-bold tracking-wider">
@@ -12,18 +8,10 @@ function BoardSelector() {
       </h3>
       <ul className="flex justify-between gap-4 mt-6">
         <li className="w-full">
-          <CitySelector
-            city={city}
-            setCity={setCity}
-            setDistrict={setDistrict}
-          />
+          <CitySelector />
         </li>
         <li className="w-full">
-          <DistrictSelector
-            city={city}
-            district={district}
-            setDistrict={setDistrict}
-          />
+          <DistrictSelector />
         </li>
       </ul>
     </div>
