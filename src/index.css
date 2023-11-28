@@ -1,69 +1,165 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap");
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  * {
+    @apply text-gray-80 font-sans;
   }
-  a:hover {
-    color: #747bff;
+}
+
+/* texture for background*/
+.noisy-orange {
+  background-image: url("./assets/texture-orange.png");
+}
+
+.noisy-beige {
+  background-image: url("./assets/texture-beige.png");
+}
+
+.bg-radiation {
+  background-image: url("./assets/bg-radiation.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* animations */
+.flags-milk {
+  animation: slide 10s linear infinite;
+}
+
+.flags-chicken {
+  animation: slide-r 10s linear infinite;
+}
+
+.card-home:hover img {
+  transform: scale(1.05);
+}
+
+.home-title-1 {
+  animation: jumping 5s infinite;
+}
+.home-title-2 {
+  animation: jumping 5s infinite;
+  animation-delay: 0.3s;
+}
+.home-title-3 {
+  animation: jumping 5s infinite;
+  animation-delay: 0.6s;
+}
+.home-title-4 {
+  animation: jumping 5s infinite;
+  animation-delay: 0.9s;
+}
+.home-title-5 {
+  animation: jumping 5s infinite;
+  animation-delay: 1.2s;
+}
+.home-title-6 {
+  animation: jumping 5s infinite;
+  animation-delay: 1.5s;
+}
+
+.map-svg {
+  animation: fade 0.3s linear;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(100%);
   }
-  button {
-    background-color: #f9f9f9;
+  100% {
+    transform: translateY(-350%);
+  }
+}
+
+@keyframes slide-r {
+  0% {
+    transform: translateY(-350%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes jumping {
+  10% {
+    border-radius: 50%;
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+  20% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* loading animation */
+.loader {
+  width: 48px;
+  height: 48px;
+  position: relative;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 48em;
+  height: 48em;
+  background-image: radial-gradient(circle 10px, #e0846b 100%, transparent 0),
+    radial-gradient(circle 10px, #e0846b 100%, transparent 0),
+    radial-gradient(circle 10px, #e0846b 100%, transparent 0),
+    radial-gradient(circle 10px, #e0846b 100%, transparent 0),
+    radial-gradient(circle 10px, #e0846b 100%, transparent 0),
+    radial-gradient(circle 10px, #e0846b 100%, transparent 0),
+    radial-gradient(circle 10px, #e0846b 100%, transparent 0),
+    radial-gradient(circle 10px, #e0846b 100%, transparent 0);
+  background-position: 0em -18em, 0em 18em, 18em 0em, -18em 0em, 13em -13em,
+    -13em -13em, 13em 13em, -13em 13em;
+  background-repeat: no-repeat;
+  font-size: 0.5px;
+  border-radius: 50%;
+  animation: blast 1s ease-in infinite;
+}
+.loader::after {
+  font-size: 1px;
+  background: #e0846b;
+  animation: bounce 1s ease-in infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    font-size: 0.75px;
+  }
+  50% {
+    font-size: 1.5px;
+  }
+}
+@keyframes blast {
+  0%,
+  40% {
+    font-size: 0.5px;
+  }
+  70% {
+    opacity: 1;
+    font-size: 4px;
+  }
+  100% {
+    font-size: 6px;
+    opacity: 0;
   }
 }
