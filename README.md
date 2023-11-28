@@ -39,6 +39,8 @@ src
 └── utils //通用函式
 ```
 
+<br>
+
 ## 功能
 開票結果圖表皆取自[中選會公開資料](https://db.cec.gov.tw/ElecTable/Election?type=President)
 如有任何不合法之引用，請立即來信通知。
