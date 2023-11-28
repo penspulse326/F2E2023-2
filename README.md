@@ -7,7 +7,7 @@
 設計稿：[連結](https://www.figma.com/file/B1XXMBN3OoDIuCFlujAt1w/The-F2E-%7C-%E7%B8%BD%E7%B5%B1%E9%96%8B%E7%A5%A8%E7%B6%B2%E7%AB%99?type=design&node-id=381%3A54894&mode=design&t=8ZWsGpsvLxg9NtYu-1)  
 展示網頁：[連結](https://penspulse326.github.io/F2E2023-2/)
 
-註：目前還在測試版本，網頁隨時可能因部署而暫時無法查看
+註：網頁可能因部署而暫時無法查看，如遇此狀況請過 1 分鐘後再嘗試
 
 <br>
 
