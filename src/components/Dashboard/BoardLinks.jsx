@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import CityContext from "../../contexts/CityContext";
 
-function BoardLinks({ setCity, setDistrict }) {
+function BoardLinks() {
+  const { setCity, setDistrict } = useContext(CityContext);
+
   const handleClick = () => {
     setDistrict(null);
     setCity(null);
@@ -28,10 +31,5 @@ function BoardLinks({ setCity, setDistrict }) {
     </ul>
   );
 }
-
-BoardLinks.propTypes = {
-  setCity: PropTypes.func.isRequired,
-  setDistrict: PropTypes.func.isRequired,
-};
 
 export default BoardLinks;

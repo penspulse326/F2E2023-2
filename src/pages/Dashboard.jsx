@@ -1,16 +1,30 @@
-import Board from "../components/Board";
-import BoardNav from "../components/BoardNav";
+import { useState, useEffect } from "react";
+import { CityContextProvider } from "../contexts/CityContext";
+import BoardNav from "../components/Dashboard/BoardNav";
+import BoardWrapper from "../components/Dashboard/BoardWrapper";
+import Loading from "../components/Loading";
 
 function Dashboard() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const blurStyle = isLoading && "blur-sm";
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 1800);
+  }, []);
+
   return (
-    <div>
-      <BoardNav></BoardNav>
-      <div className="noisy-beige">
+    <>
+      {isLoading && <Loading />}{" "}
+      <div className={`${blurStyle} noisy-beige`}>
+        <BoardNav></BoardNav>
         <div className="bg-radiation px-20 py-[100px] bg-cover bg-center">
-          <Board></Board>
+          <CityContextProvider>
+            <BoardWrapper />
+          </CityContextProvider>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
